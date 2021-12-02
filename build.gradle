@@ -9,12 +9,6 @@ group = 'com.crud'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
-configurations {
-	compileOnly {
-		extendsFrom annotationProcessor
-	}
-}
-
 repositories {
 	mavenCentral()
 }
@@ -31,7 +25,11 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	runtimeOnly 'mysql:mysql-connector-java'
-	runtimeOnly group: 'org.postgresql', name: 'postgresql', version: '42.3.1'
+	runtimeOnly 'org.postgresql:postgresql:42.2.24'
+	testImplementation ('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+
 //	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 }
 
