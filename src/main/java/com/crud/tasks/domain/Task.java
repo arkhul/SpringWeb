@@ -10,7 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 @Entity(name = "tasks")
@@ -28,12 +29,5 @@ public class Task {
     public Task(String title, String content) {
         this.title = title;
         this.content = content;
-    }
-
-    public Task(Long id, String title, String content) {
-    }
-
-    public Task() {
-
     }
 }
