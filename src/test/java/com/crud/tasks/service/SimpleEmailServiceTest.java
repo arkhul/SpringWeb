@@ -30,7 +30,7 @@ class SimpleEmailServiceTest {
                 .mailTo("test@test.com")
                 .subject("Test")
                 .message("Test Message")
-//                .toCc("to@wp.pl")
+                .toCc("to@wp.pl")
                 .build();
 
         SimpleMailMessage mailMessage = new SimpleMailMessage();
@@ -38,9 +38,7 @@ class SimpleEmailServiceTest {
         mailMessage.setSubject(mail.getSubject());
         mailMessage.setText(mail.getMessage());
         Optional<String> toCc = Optional.ofNullable(mail.getToCc());
-        if (toCc.isPresent()) {
-            mailMessage.setCc(mail.getToCc());
-        }
+        toCc.ifPresent(sendMail -> mailMessage.setCc(mail.getToCc()));
 
         //When
         simpleEmailService.send(mail);

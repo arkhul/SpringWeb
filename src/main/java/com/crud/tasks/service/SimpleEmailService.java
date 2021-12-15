@@ -34,10 +34,10 @@ public class SimpleEmailService {
         mailMessage.setSubject(mail.getSubject());
         mailMessage.setText(mail.getMessage());
         Optional<String> toCc = Optional.ofNullable(mail.getToCc());
-        if (toCc.isPresent()) {
+        toCc.ifPresent(sendMail -> {
             mailMessage.setCc(mail.getToCc());
             log.info("Mail with toCc option.");
-        }
+        });
         return mailMessage;
     }
 }

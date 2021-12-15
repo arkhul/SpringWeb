@@ -1,5 +1,6 @@
 package com.crud.tasks.domain;
 
+import com.crud.tasks.config.AdminConfig;
 import lombok.*;
 
 @Getter
