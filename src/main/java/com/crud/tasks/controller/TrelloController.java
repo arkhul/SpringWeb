@@ -1,8 +1,10 @@
 package com.crud.tasks.controller;
 
-import com.crud.tasks.domain.*;
-import com.crud.tasks.service.TrelloService;
+import com.crud.tasks.domain.CreatedTrelloCardDto;
+import com.crud.tasks.domain.TrelloBoardDto;
+import com.crud.tasks.domain.TrelloCardDto;
 import com.crud.tasks.trello.client.TrelloClient;
+import com.crud.tasks.trello.facade.TrelloFacade;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,23 +16,23 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TrelloController {
 
-    private final TrelloService trelloService;
+    private final TrelloFacade trelloFacade;
     private final TrelloClient trelloClient;
 
     @GetMapping("getTrelloBoards")
     public List<TrelloBoardDto> getTrelloBoards() {
-        return trelloService.fetchTrelloBoards();
+        return trelloFacade.fetchTrelloBoards();
     }
 
     @PostMapping("createTrelloCard")
-    public CreatedTrelloCard createTrelloCard(@RequestBody TrelloCardDto trelloCardDto) {
-        return trelloService.createTrelloCard(trelloCardDto);
+    public CreatedTrelloCardDto createTrelloCard(@RequestBody TrelloCardDto trelloCardDto) {
+        return trelloFacade.createCard(trelloCardDto);
     }
 
     @GetMapping("getBadges")
     public void getBadges() {
         trelloClient.getTrelloBadges();
-        List<CreatedTrelloCard> trelloCards = trelloClient.getTrelloBadges();
+        List<CreatedTrelloCardDto> trelloCards = trelloClient.getTrelloBadges();
         trelloCards.forEach(card -> {
             System.out.println("id: " + card.getId());
             System.out.println("badges:");
