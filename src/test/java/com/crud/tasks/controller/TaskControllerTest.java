@@ -54,21 +54,21 @@ class TaskControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].content", Matchers.is("Task_1")));
     }
 
-    @Test
-    void getTaskTest() throws Exception {
-        // Given
-        when(taskController.getTask(any(Long.class)))
-                .thenReturn(new TaskDto(1L, "First", "Task_1"));
-
-        // When & Then
-        mockMvc
-                .perform(MockMvcRequestBuilders
-                        .get("/v1/task/getTask/1")
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.id", Matchers.is(1)))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.title", Matchers.is("First")))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.content", Matchers.is("Task_1")));
-    }
+//    @Test
+//    void getTaskTest() throws Exception {
+//        // Given
+//        when(taskController.getTask(any(Long.class)))
+//                .thenReturn(new TaskDto(1L, "First", "Task_1"));
+//
+//        // When & Then
+//        mockMvc
+//                .perform(MockMvcRequestBuilders
+//                        .get("/v1/task/getTask/1")
+//                        .contentType(MediaType.APPLICATION_JSON))
+//                .andExpect(MockMvcResultMatchers.jsonPath("$.id", Matchers.is(1)))
+//                .andExpect(MockMvcResultMatchers.jsonPath("$.title", Matchers.is("First")))
+//                .andExpect(MockMvcResultMatchers.jsonPath("$.content", Matchers.is("Task_1")));
+//    }
 
     @Test
     void deleteTaskTest() throws Exception {
