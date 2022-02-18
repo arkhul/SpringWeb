@@ -88,6 +88,7 @@ class TrelloFacadeTest {
                 assertThat(trelloListDto.getId()).isEqualTo("1");
                 assertThat(trelloListDto.getName()).isEqualTo("test_list");
                 assertThat(trelloListDto.isClosed()).isFalse();
+
             });
         });
     }
