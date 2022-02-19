@@ -2,12 +2,14 @@ package com.crud.tasks.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
 @AllArgsConstructor
+@NoArgsConstructor
 public class TrelloList {
 
-    private final String id;
-    private final String name;
-    private final boolean isClosed;
+    private String id;
+    private String name;
+    private boolean isClosed;
 }
