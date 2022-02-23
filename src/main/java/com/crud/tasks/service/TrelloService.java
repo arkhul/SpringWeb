@@ -1,11 +1,11 @@
 package com.crud.tasks.service;
 
-import com.crud.tasks.config.AdminConfig;
 import com.crud.tasks.domain.CreatedTrelloCardDto;
 import com.crud.tasks.domain.Mail;
 import com.crud.tasks.domain.TrelloBoardDto;
 import com.crud.tasks.domain.TrelloCardDto;
 import com.crud.tasks.trello.client.TrelloClient;
+import com.crud.tasks.trello.config.AdminConfig;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
