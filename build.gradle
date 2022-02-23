@@ -33,6 +33,7 @@ dependencies {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
 	implementation 'com.google.guava:guava:23.1-jre'
+	implementation('org.springframework.boot:spring-boot-starter-thymeleaf')
 
 //	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 }
