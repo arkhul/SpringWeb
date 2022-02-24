@@ -1,7 +1,5 @@
 package com.crud.tasks.controller;
 
-
-import com.crud.tasks.domain.Task;
 import com.crud.tasks.domain.TaskDto;
 import com.crud.tasks.mapper.TaskMapper;
 import com.crud.tasks.service.DbService;
@@ -18,7 +16,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.util.List;
-import java.util.Optional;
 
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.when;
@@ -57,15 +54,13 @@ class TaskControllerTest {
     }
 
     @Test
-    void getTaskTest() throws TaskNotFoundException, Exception {
+    void getTaskTest() throws Exception {
         // Given
-        when(Optional.of(taskController.getTask(any(Long.class))))
-                .thenReturn(Optional.ofNullable(Optional.of(new TaskDto(1L, "First", "Task_1")).orElseThrow(TaskNotFoundException::new)));
+        when(taskController.getTask(any(Long.class))).thenReturn(new TaskDto(1L, "First", "Task_1"));
 
         // When & Then
         mockMvc
-                .perform(MockMvcRequestBuilders
-                        .get("/v1/tasks/{taskId}", 1)
+                .perform(get("/v1/tasks/{taskId}", 1)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.id", Matchers.is(1)))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.title", Matchers.is("First")))
@@ -75,7 +70,7 @@ class TaskControllerTest {
     @Test
     void deleteTaskTest() throws Exception {
         this.mockMvc.perform(MockMvcRequestBuilders
-                .delete("/v1/tasks/1")
+                .delete("/v1/tasks?taskId=" + any(Long.class))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
@@ -103,21 +98,19 @@ class TaskControllerTest {
 
     @Test
     void createTaskTest() throws Exception {
-    // Given
-//        TaskDto taskDto = new TaskDto(22L, "Title22", "Content22");
-//        when(taskController.createTask(any(TaskDto.class))).thenReturn(taskDto);
-//        Gson gson = new Gson();
-//        String jsonContent = gson.toJson(taskDto);
-//
-//        //When & Then
-//        mockMvc
-//                .perform(MockMvcRequestBuilders
-//                        .post("/v1/tasks")
-//                        .contentType(MediaType.APPLICATION_JSON)
-//                        .characterEncoding("UTF-8")
-//                        .content(jsonContent))
-//                .andExpect(MockMvcResultMatchers.jsonPath("$.id", Matchers.is(22)))
-//                .andExpect(MockMvcResultMatchers.jsonPath("$.title", Matchers.is("Title22")))
-//                .andExpect(MockMvcResultMatchers.jsonPath("$.content", Matchers.is("Content22")));
+        // Given
+        TaskDto taskDto = new TaskDto(22L, "Title22", "Content22");
+
+        // When
+        Gson gson = new Gson();
+        String jsonContent = gson.toJson(taskDto);
+
+        // Then
+        mockMvc.perform(MockMvcRequestBuilders
+                .post("/v1/tasks")
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding("UTF-8")
+                .content(jsonContent))
+                .andExpect(status().isOk());
     }
 }
