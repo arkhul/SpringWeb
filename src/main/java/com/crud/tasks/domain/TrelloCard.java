@@ -2,13 +2,15 @@ package com.crud.tasks.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
 @AllArgsConstructor
+@NoArgsConstructor
 public class TrelloCard {
 
-    private final String name;
-    private final String description;
-    private final String pos;
-    private final String listId;
+    private String name;
+    private String description;
+    private String pos;
+    private String listId;
 }
