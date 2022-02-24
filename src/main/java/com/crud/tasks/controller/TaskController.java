@@ -1,10 +1,8 @@
 package com.crud.tasks.controller;
 
-import com.crud.tasks.domain.Task;
 import com.crud.tasks.domain.TaskDto;
 import com.crud.tasks.mapper.TaskMapper;
 import com.crud.tasks.service.DbService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -28,7 +26,7 @@ public class TaskController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/tasks/{taskId}")
-    public TaskDto getTask(@PathVariable Long taskId) throws TaskNotFoundException {
+    public TaskDto getTask(@PathVariable Long taskId) throws Exception {
         return taskMapper.mapToTaskDto(service.getTask(taskId).orElseThrow(TaskNotFoundException::new));
     }
 

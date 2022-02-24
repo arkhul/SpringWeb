@@ -1,6 +1,7 @@
 package com.crud.tasks.controller;
 
 
+import com.crud.tasks.domain.Task;
 import com.crud.tasks.domain.TaskDto;
 import com.crud.tasks.mapper.TaskMapper;
 import com.crud.tasks.service.DbService;
@@ -56,11 +57,10 @@ class TaskControllerTest {
     }
 
     @Test
-    void getTaskTest() throws Exception {
+    void getTaskTest() throws TaskNotFoundException, Exception {
         // Given
-/*        when(taskController.getTask(any(Long.class)))
-                .thenReturn(Optional.ofNullable(new TaskDto(1L, "First", "Task_1"))
-                        .orElseThrow(TaskNotFoundException::new));
+        when(Optional.of(taskController.getTask(any(Long.class))))
+                .thenReturn(Optional.ofNullable(Optional.of(new TaskDto(1L, "First", "Task_1")).orElseThrow(TaskNotFoundException::new)));
 
         // When & Then
         mockMvc
@@ -70,8 +70,6 @@ class TaskControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.id", Matchers.is(1)))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.title", Matchers.is("First")))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.content", Matchers.is("Task_1")));
-
- */
     }
 
     @Test
