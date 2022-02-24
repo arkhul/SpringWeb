@@ -14,18 +14,17 @@ import java.util.List;
 @CrossOrigin("*")
 @RestController
 @RequestMapping("/v1/trello")
-@RequiredArgsConstructor
 public class TrelloController {
 
-    private final TrelloFacade trelloFacade;
-//    private final TrelloClient trelloClient;
+    @Autowired
+    private TrelloFacade trelloFacade;
 
-    @GetMapping("getTrelloBoards")
+    @RequestMapping(method = RequestMethod.GET, value = "/boards")
     public List<TrelloBoardDto> getTrelloBoards() {
         return trelloFacade.fetchTrelloBoards();
     }
 
-    @PostMapping("createTrelloCard")
+    @RequestMapping(method = RequestMethod.POST, value = "/cards")
     public CreatedTrelloCardDto createTrelloCard(@RequestBody TrelloCardDto trelloCardDto) {
         return trelloFacade.createCard(trelloCardDto);
     }
